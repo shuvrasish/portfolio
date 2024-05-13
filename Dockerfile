@@ -1,5 +1,5 @@
 # Use the official Node.js image as base
-FROM node:16-alpine
+FROM node:16-alpine AS builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 
 # Install dependencies
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile --production
 
 # Copy the rest of the application code
 COPY . .
@@ -19,5 +19,5 @@ RUN yarn build
 # Expose port 3000
 EXPOSE 3000
 
-# Start the Next.js app
+# Start the Next.js app in production mode
 CMD ["yarn", "start"]

@@ -2,13 +2,16 @@ version: "3"
 
 services:
   app:
+    container_name: next-app
+    image: next-app
     build:
       context: .
     ports:
       - "3000:3000"
     volumes:
-      - ".:/app"
-      - "/app/node_modules"
+      - .:/app
+      - /app/node_modules
+      - /app/.next
     environment:
       - NEXT_PUBLIC_KEY_GOOGLE_API=mykey
       - NODE_ENV=dev
