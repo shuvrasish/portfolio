@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    environment:
+      - NEXT_PUBLIC_KEY_GOOGLE_API=mykey
+      - NODE_ENV=dev
+      - NEXT_PUBLIC_BLACKLIST_COUNTRIES=''
