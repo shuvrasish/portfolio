@@ -8,15 +8,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Connect to Linode server (insecure)
-        # **WARNING:** This example uses password authentication, which is insecure. It's highly recommended to use SSH keys for secure connections.
+      - name: SSH into Linode and deploy
         run: |
-          sshpass -h "170.187.237.22" ssh -p 22 -o StrictHostKeyChecking=no ubuntu@170.187.237.22 "password sR689359@"
 
-      - name: Update code (Git pull)
-        run: git pull --ff
-
-      - name: Build and start application (using docker-compose)
-        run: docker-compose up --build
+          sshpass -p 'your_password' ssh -o StrictHostKeyChecking=no ubuntu@170.187.237.22 'bash -s' << 'EOF'
+            cd /home/ubuntu/portfolio
+            git checkout main  # Pull latest changes from main branch
+            git pull --ff
+            docker-compose up --build            # Install dependencies
+          EOF
