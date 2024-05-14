@@ -18,5 +18,5 @@ jobs:
             cd /home/ubuntu/portfolio
             git checkout main  # Pull latest changes from main branch
             git pull --ff
-            docker-compose up --build            # Install dependencies
+            docker compose -f docker-compose.yml up --build            # Install dependencies
           EOF
