@@ -16,6 +16,9 @@ jobs:
           sshpass -h "170.187.237.22" ssh -p 22 -o StrictHostKeyChecking=no ubuntu@170.187.237.22 "password sR689359@"
 
       - name: Navigate to portfolio directory
+        run: cd ~
+
+      - name: Navigate to portfolio directory
         run: cd portfolio
 
       - name: Update code (Git pull)
