@@ -16,3 +16,19 @@ services:
       - NEXT_PUBLIC_KEY_GOOGLE_API=mykey
       - NODE_ENV=dev
       - NEXT_PUBLIC_BLACKLIST_COUNTRIES=''
+    networks:
+      - portfolio-network
+  nginx:
+    image: nginx:latest
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+    networks:
+      - portfolio-network
+
+networks:
+  portfolio-network:
