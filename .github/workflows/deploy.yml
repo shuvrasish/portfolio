@@ -14,7 +14,7 @@ jobs:
       - name: SSH into Linode and deploy
         run: |
 
-          sshpass -p 'your_password' ssh -o StrictHostKeyChecking=no ubuntu@170.187.237.22 'bash -s' << 'EOF'
+          sshpass -p 'sR689359@' ssh -o StrictHostKeyChecking=no ubuntu@170.187.237.22 'bash -s' << 'EOF'
             cd /home/ubuntu/portfolio
             git checkout main  # Pull latest changes from main branch
             git pull --ff
