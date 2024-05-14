@@ -12,10 +12,6 @@ services:
       - .:/app
       - /app/node_modules
       - /app/.next
-    environment:
-      - NEXT_PUBLIC_KEY_GOOGLE_API=mykey
-      - NODE_ENV=dev
-      - NEXT_PUBLIC_BLACKLIST_COUNTRIES=''
     networks:
       - portfolio-network
   nginx:

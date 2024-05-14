@@ -13,11 +13,6 @@ RUN yarn install --frozen-lockfile
 # Copy the rest of the application code
 COPY . .
 
-# Create a file named .env and add content
-RUN echo "NEXT_PUBLIC_KEY_GOOGLE_API=your API key" >> .env
-RUN echo "NODE_ENV=Production" >> .env
-RUN echo "NEXT_PUBLIC_BLACKLIST_COUNTRIES=''">> .env
-
 # Build the Next.js app
 RUN yarn build
 
