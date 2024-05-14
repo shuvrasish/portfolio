@@ -1,0 +1,25 @@
+name: Deploy Portfolio App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Connect to Linode server (insecure)
+        # **WARNING:** This example uses password authentication, which is insecure. It's highly recommended to use SSH keys for secure connections.
+        run: |
+          sshpass -h "170.187.237.22" ssh -p 22 -o StrictHostKeyChecking=no ubuntu@170.187.237.22 "password sR689359@"
+
+      - name: Navigate to portfolio directory
+        run: cd portfolio
+
+      - name: Update code (Git pull)
+        run: git pull --ff
+
+      - name: Build and start application (using docker-compose)
+        run: docker-compose up --build
