@@ -12,11 +12,15 @@ jobs:
         uses: actions/checkout@v2
 
       - name: SSH into Linode and deploy
+        env:
+          PASSWORD: ${{ secrets.SSH_PASSWORD }}
         run: |
 
-          sshpass -p 'sR689359@' ssh -o StrictHostKeyChecking=no ubuntu@170.187.237.22 'bash -s' << 'EOF'
-            cd /home/ubuntu/portfolio
-            git checkout main  # Pull latest changes from main branch
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no ubuntu@170.187.237.22 'bash -s' << 'EOF'
+            cd /home/ubuntu
+            git clone https://github.com/shuvrasish/portfolio.git
+            cd portfolio
+            git checkout main
             git pull --ff
-            docker compose -f docker-compose.yml up --build            # Install dependencies
+            docker compose -f docker-compose.yml up --build -d
           EOF
