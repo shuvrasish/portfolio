@@ -1,20 +1,15 @@
 import React from "react";
 import Img from "../../../components/smallComp/image/Img";
 import ArrowIcon from "../../../components/Icons/ArrowIcon";
+
 export default function AboutMe(props) {
   const technologies = [
-    [
-      "Python",
-      "C++",
-      "JavaScript",
-      "TypeScript",
-      "SQL(Postgres)",
-      "HTML",
-      "CSS",
-    ],
-    ["Django", "ReactJS", "Next.js", "Bootstrap", "Cypress", "SCSS", "Celery"],
-    ["Postman", "Docker", "DBeaver", "Redux", "Redis", "AWS", "Git"],
-    ["DBMS", "DSA", "GitHub", "VS Code", "PyCharm"],
+    // Programming Languages
+    ["Python", "C++", "JavaScript", "TypeScript", "PostgreSQL"],
+    // Web Frameworks & Libraries
+    ["Django", "ReactJS", "Next.js", "Bootstrap", "SCSS", "Git"],
+    // Development Tools & Services
+    ["Postman", "Docker", "DBeaver", "Redux", "Redis", "AWS", "GitHub"],
   ];
 
   return (
@@ -55,7 +50,7 @@ export default function AboutMe(props) {
                 with a knack for crafting robust solutions that excel in the
                 digital realm. My journey began with a profound interest in
                 technology during my college days, which led me to explore
-                programming and problem-solvin. Over the years, I&apos;ve honed
+                programming and problem-solving. Over the years, I&apos;ve honed
                 my skills and expertise to become proficient in a variety of
                 domains, specializing in web development and system
                 architecture.
@@ -85,19 +80,6 @@ export default function AboutMe(props) {
               </span>
             </div>
 
-            {/* <div className="font-Header tracking-wide">
-              <span className="text-gray-400  ">
-                Fast-forward to today, I&apos;ve had the privilege of working at
-                <span className="text-AAsecondary"> a huge manufacturing company</span>,
-                <span className="text-AAsecondary"> a start-up</span>,{" "}
-                <span className="text-AAsecondary">export-import companies</span>, also
-                <span className="text-AAsecondary"> freelancing</span> and recently as Lead for the{" "}
-                <span className="text-AAsecondary">Google Developer Student club</span>. Experienced in Desktop & Web
-                Development, lately with Arduino Development. My main focus these days is creating and testing{" "}
-                <span className="text-AAsecondary">Smart Contracts</span> with Hardhat.
-              </span>
-            </div> */}
-
             <div className="font-Header tracking-wide">
               <span className="text-gray-400  ">
                 Here are a few technologies I&apos;ve been working with recently
@@ -106,10 +88,7 @@ export default function AboutMe(props) {
             </div>
             <div className="font-Header tracking-wide flex flex-row space-x-16">
               {technologies.map((techGroup, groupIndex) => (
-                <div
-                  key={groupIndex}
-                  className="flex flex-row space-x-2 items-center"
-                >
+                <div key={groupIndex} className="flex flex-row space-x-2 ">
                   <div className="flex flex-col space-y-4 sm:text-base text-sm">
                     {techGroup.map((tech, index) => (
                       <div

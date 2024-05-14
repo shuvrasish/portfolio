@@ -3,7 +3,6 @@ import { motion } from "../../../node_modules/framer-motion/dist/framer-motion";
 import GithubIcon from "../../Icons/GithubIcon";
 import LinkedinIcon from "../../Icons/LinkedinIcon";
 import InstagramIcon from "../../Icons/InstagramIcon";
-import YoutubeIcon from "../../Icons/YoutubeIcon";
 
 const IconClickableWithAnimation = (props) => {
   return (
@@ -55,7 +54,6 @@ export default function SocialMediaEmail(props: { finishedLoading: boolean }) {
               Icon={InstagramIcon}
               href={"https://www.instagram.com/shuvrasish/"}
             />
-            {/* Youtube Icon */}
           </div>
           <div className="h-28 w-0.5 bg-gray-400"></div>
         </div>

@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { motion } from "../../../node_modules/framer-motion/dist/framer-motion";
 import ArrowIcon from "../../Icons/ArrowIcon";
-import Anchanto from "./Descriptions/Anchanto";
-export default function WhereIHaveWorked() {
-  const barRef = React.useRef<HTMLDivElement>(null);
-  // ? INFORMATIONAL control the green position using px,
-  // ? INFORMATIONAL the default value of barRef's class should be at the beginning translate-y-[0px]
-  const GetDescription = () => {
-    switch (DescriptionJob) {
-      case "Anchanto":
-        return <Anchanto />;
-    }
-  };
+import GenericExperience from "./Descriptions/GenericExperience";
+import { experienceData } from "./Descriptions/data";
+
+const WhereIHaveWorked = () => {
+  const GetDescription = () => (
+    <GenericExperience
+      title={experienceData[DescriptionJob].title}
+      company={experienceData[DescriptionJob].company}
+      date={experienceData[DescriptionJob].date}
+      websiteLink={experienceData[DescriptionJob].websiteLink}
+      tasks={experienceData[DescriptionJob].tasks}
+    />
+  );
+
   const [DescriptionJob, setDescriptionJob] = useState("Anchanto");
   return (
     <div
@@ -47,11 +49,9 @@ export default function WhereIHaveWorked() {
       </section>
     </div>
   );
-}
+};
 
 const CompaniesBar = (props) => {
-  const [barPosition, setBarPosition] = useState<Number>(-8); // Green bar position by the default it's -20px
-  const [barAbovePosition, setBarAbovePosition] = useState<Number>(0);
   const [companyNameBackgroundColorGreen, setCompanyNameBackgroundColorGreen] =
     useState<boolean[]>([true, false, false, false, false, false, false]);
 
@@ -59,8 +59,6 @@ const CompaniesBar = (props) => {
     return (
       <button
         onClick={() => {
-          setBarPosition(props.BarPosition);
-          setBarAbovePosition(props.BarAvobePosition);
           props.setDescriptionJob(props.DescriptionJob);
           setCompanyNameBackgroundColorGreen(
             props.CompanyNameBackgroundColorGreen
@@ -82,6 +80,27 @@ const CompaniesBar = (props) => {
     );
   };
 
+  const companyData = [
+    {
+      CompanyName: "Anchanto",
+      DescriptionJob: "Anchanto",
+    },
+    {
+      CompanyName: "Janoo App",
+      DescriptionJob: "Janoo",
+    },
+    {
+      CompanyName: "Securaeon",
+      DescriptionJob: "Securaeon",
+    },
+  ];
+
+  const generateBackgroundArray = (currentIndex, totalCompanies) => {
+    const backgroundArray = new Array(totalCompanies).fill(false);
+    backgroundArray[currentIndex] = true;
+    return backgroundArray;
+  };
+
   return (
     <div
       id="WhereIhaveWorkedSection"
@@ -89,45 +108,32 @@ const CompaniesBar = (props) => {
       overflow-auto scrollbar-hide md:overflow-hidden pb-4 md:pb-0 justify-start
        sm:justify-center items-start sm:items-center"
     >
-      {/* // ? left bar Holder */}
-      <div
-        className=" hidden md:block bg-gray-500 relative h-0.5 w-34 md:h-[40px] translate-y-1 md:w-0.5  
-        rounded md:order-1 order-2  "
-      >
-        {/* // ? animated left bar */}
-        <motion.div
-          animate={{ y: barPosition }}
-          // ref={barRef}
-          className={`absolute w-10 h-0.5 md:w-0.5 md:h-12 rounded bg-AAsecondary `}
-        ></motion.div>
-      </div>
       {/* // ? Companies name as buttons */}
       <div className="flex flex-col md:order-2 order-1 space-y-1 pl-8 md:pl-0 ">
         <div className="flex flex-row md:flex-col">
-          <CompanyButton
-            ButtonOrderOfcompanyNameBackgroundColorGreen={0}
-            CompanyName="Anchanto"
-            BarPosition={-12}
-            BarAvobePosition={1}
-            DescriptionJob="Anchanto"
-            CompanyNameBackgroundColorGreen={[
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ]}
-            setDescriptionJob={props.setDescriptionJob}
-          />
-        </div>
-        <div className="block md:hidden h-0.5 rounded bg-gray-500">
-          <motion.div
-            animate={{ x: barAbovePosition }}
-            className="w-[128px] h-0.5 rounded bg-AAsecondary"
-          ></motion.div>
+          {companyData.map((company, index) => {
+            const CompanyNameBackgroundColorGreen = generateBackgroundArray(
+              index,
+              companyData.length
+            );
+
+            return (
+              <CompanyButton
+                key={index}
+                ButtonOrderOfcompanyNameBackgroundColorGreen={index}
+                CompanyName={company.CompanyName}
+                DescriptionJob={company.DescriptionJob}
+                CompanyNameBackgroundColorGreen={
+                  CompanyNameBackgroundColorGreen
+                }
+                setDescriptionJob={props.setDescriptionJob}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
   );
 };
+
+export default WhereIHaveWorked;
